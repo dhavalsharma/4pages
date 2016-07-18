@@ -74,8 +74,9 @@
 	(0, _platformBrowserDynamic.bootstrap)(_app.AppComponent, [_http.HTTP_PROVIDERS, _todoStore.TodoStoreService, _checkout.CheckoutService, _checkoutStore.CheckoutStoreService, _todo.routeProvider, { provide: 'AUTHOR', useValue: 'Dhaval Sharma' },
 	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'http://preview.a61243d103yds4ie66yylhaur8s38frslpnopp3zuzvvx6r.box.codeanywhere.com:9000/app/status' },
 	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'http://localhost:9000/app/#/status' },
-	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/4pages/app/#/status' },
-	{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/app/#/status' }, { provide: 'PAYON_BASE_URL', useValue: 'https://test.oppwa.com/v1/' }, { provide: 'PAYON_BASE_URL_NO_VERSION', useValue: 'https://test.oppwa.com' }, { provide: _common.LocationStrategy, useClass: _common.HashLocationStrategy }]);
+	{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/4pages/app/#/status' },
+	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/app/#/status' },
+	{ provide: 'PAYON_BASE_URL', useValue: 'https://test.oppwa.com/v1/' }, { provide: 'PAYON_BASE_URL_NO_VERSION', useValue: 'https://test.oppwa.com' }, { provide: _common.LocationStrategy, useClass: _common.HashLocationStrategy }]);
 
 /***/ },
 /* 1 */
@@ -63480,6 +63481,7 @@
 	
 	      //this.resourcePath = this._route.snapshot.params.resourcePath;
 	      this.sub = this._router.routerState.queryParams.subscribe(function (params) {
+	        console.log("ShopperResultComponent queryParams", params);
 	        _this.resourcePath = params["resourcePath"];
 	        _this.checkoutId = params["id"];
 	        //now call service to confirm donation
@@ -63523,13 +63525,13 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	// Add the RxJS Observable operators we need in this app.
+	//import * from '../rxjs-operators';
+	//import {Observable} from 'rxjs/Rx';
 	
 	
 	var _core = __webpack_require__(/*! @angular/core */ 5);
 	
 	var _http = __webpack_require__(/*! @angular/http */ 328);
-	
-	__webpack_require__(/*! ../rxjs-operators */ 440);
 	
 	var _checkout = __webpack_require__(/*! ../models/checkout.model */ 457);
 	
@@ -63649,6 +63651,9 @@
 	    key: 'getPaymentStatus',
 	    value: function getPaymentStatus(resourcePath) {
 	      console.log("getPaymentStatus", resourcePath);
+	      if (!resourcePath) {
+	        return Observable.throw("resourcePath not found");
+	      }
 	      //append the path
 	      var statusURL = this._baseURLNoVersion + resourcePath;
 	      console.log("statusURL", statusURL);
@@ -64748,7 +64753,7 @@
 	        _this.checkoutId = _this.result.id;
 	        _this.canPay = true;
 	        //now is the time to load external scripts
-	        var formURL = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=" + _this.checkoutId;
+	        //let formURL = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId="+ this.checkoutId;
 	        /*
 	        require.ensure([], require => {
 	          //load the form
@@ -64874,6 +64879,8 @@
 	exports.AppComponent = undefined;
 	
 	var _dec, _class;
+	// Add the RxJS Observable operators we need in this app.
+	
 	
 	var _core = __webpack_require__(/*! @angular/core */ 5);
 	
@@ -64882,6 +64889,8 @@
 	var _appTemplate = __webpack_require__(/*! ./app.template.html */ 465);
 	
 	var _appTemplate2 = _interopRequireDefault(_appTemplate);
+	
+	__webpack_require__(/*! ../../rxjs-operators */ 440);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
