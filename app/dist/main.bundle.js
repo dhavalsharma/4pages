@@ -74,7 +74,8 @@
 	(0, _platformBrowserDynamic.bootstrap)(_app.AppComponent, [_http.HTTP_PROVIDERS, _todoStore.TodoStoreService, _checkout.CheckoutService, _checkoutStore.CheckoutStoreService, _todo.routeProvider, { provide: 'AUTHOR', useValue: 'Dhaval Sharma' },
 	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'http://preview.a61243d103yds4ie66yylhaur8s38frslpnopp3zuzvvx6r.box.codeanywhere.com:9000/app/status' },
 	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'http://localhost:9000/app/#/status' },
-	{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/4pages/app/#/status' }, { provide: 'PAYON_BASE_URL', useValue: 'https://test.oppwa.com/v1/' }, { provide: 'PAYON_BASE_URL_NO_VERSION', useValue: 'https://test.oppwa.com' }, { provide: _common.LocationStrategy, useClass: _common.HashLocationStrategy }]);
+	//{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/4pages/app/#/status' },
+	{ provide: 'SHOPPER_RESULT_URL', useValue: 'https://dhavalsharma.github.io/app/#/status' }, { provide: 'PAYON_BASE_URL', useValue: 'https://test.oppwa.com/v1/' }, { provide: 'PAYON_BASE_URL_NO_VERSION', useValue: 'https://test.oppwa.com' }, { provide: _common.LocationStrategy, useClass: _common.HashLocationStrategy }]);
 
 /***/ },
 /* 1 */
