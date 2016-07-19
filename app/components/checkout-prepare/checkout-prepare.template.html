@@ -1,38 +1,51 @@
 <div class="container">
-  <div *ngIf="canDonate() && !canPay">
+  <div *ngIf="canDonate() && !canPay"  [hidden]="submitted">
     <h1>Make Donations</h1>
-    <form #donateForm="ngForm" (ngSubmit)="onSubmit(donateForm)" novalidate>
+    <form #donateForm="ngForm" (ngSubmit)="onSubmit(donateForm)"  class="horizontal-form" novalidate>
       <div class="form-group">
         <label for="currency">Choose currency</label>
-        <select class="form-control" required [(ngModel)] = "formValue.currency">
+        <select class="form-control" required [(ngModel)] = "formValue.currency" name="currency" #currency="ngModel">
           <option *ngFor="let c of currencies" [value]="c">{{c}}</option>
         </select>
       </div><!-- add dropdown for currency -->
+      <div [hidden]="currency.valid || currency.pristine" class="alert alert-danger">
+        Currency is required
+      </div>
 
       <div class="form-group">
         <label for="amount">Amount to Donate in Euros:</label>
-        <input type="number" id="amount" [(ngModel)]="formValue.amount"
-          class="form-control" required>
+        <div class="input-group">
+          <div class="input-group-addon" [hidden]="currency">{{formValue.currency}}</div>
+          <input type="number" id="amount" [(ngModel)]="formValue.amount"
+            class="form-control" name="amount" #amount="ngModel" required pattern="^([1-9]|[1-9]\d)$">
+        </div>
+      </div>
+      <div [hidden]="amount.valid || amount.pristine" class="alert alert-danger">
+        Amount is required and has to be between 1 and 99.
       </div>
 
-      <button type="submit" class="btn btn-default">Donate</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!donateForm.form.valid">Donate</button>
     </form>
-
   </div>
-
+  <div [hidden]="!submitted && canDonate()">
+     <h2>You submitted the following:</h2>
+     <div class="row">
+       <div class="col-xs-3">Currency</div>
+       <div class="col-xs-9  pull-left">{{ formValue.currency }}</div>
+     </div>
+     <div class="row">
+       <div class="col-xs-3">Amount</div>
+       <div class="col-xs-9 pull-left">{{ formValue.amount }}</div>
+     </div>
+   </div>
   <!-- placeholder for showing credit card form -->
-  <div *ngIf = "canPay">
-
-
-  </div>
-  <div *ngIf = "error">
-    {{error}}
-  </div>
 
   <!-- put html for greater than hour -->
-  <div *ngIf="!canDonate()">
-    <p>
-      You have already made a donation of {{amount | currency}}.
-    </p>
+  <div *ngIf="!canDonate() && !submitted">
+    <blockquote>
+    <p>You have already made a donation in last one hour. The details are below</p>
+  </blockquote>
+    <p>{{lastDonation}}</p>
   </div>
+
 </div>

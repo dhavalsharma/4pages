@@ -4,11 +4,14 @@ import { ROUTER_DIRECTIVES , ActivatedRoute, Router} from '@angular/router';
 import template from './app.template.html';
 // Add the RxJS Observable operators we need in this app.
 //import '../../rxjs-operators';
+import bstyles from './app.scss';
+//var bstyles = require('./app.scss');
 
 @Component({
   selector: 'donar-app',
   directives: [ROUTER_DIRECTIVES],
-  styles: [require('./app.scss')],
+  //styles: [require('./app.scss')],
+  styles: [ bstyles ],
   encapsulation: ViewEncapsulation.None,
   template: template
 })

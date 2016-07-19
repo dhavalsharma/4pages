@@ -1,7 +1,7 @@
-import { Component, NgForm, Inject, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
 
-import {FORM_DIRECTIVES} from '@angular/common';
+//import {FORM_DIRECTIVES} from '@angular/common';
 import { NgForm }    from '@angular/forms';
 
 import { CheckoutService } from '../../services/checkout.service';
@@ -11,10 +11,14 @@ import template from './checkout-prepare.template.html';
 import { ShopperResultComponent } from '../shopper-result/shopper-result.component';
 import { CheckoutFormComponent } from '../checkout-form/checkout-form.component';
 
+import customStyles from './checkout-prepare.scss';
+
 @Component({
   selector: 'checkout-prepare',
   template: template,
-  directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, ShopperResultComponent,
+  styles: [ customStyles ],
+  //directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, ShopperResultComponent,
+  directives: [ROUTER_DIRECTIVES, ShopperResultComponent,
     CheckoutFormComponent]
 })
 export class CheckoutPrepareComponent {
@@ -30,7 +34,6 @@ export class CheckoutPrepareComponent {
     this.shopperResultUrl = shopperResultUrl;
   }
   checkoutId;
-  canPay = false;
   formValue = {};
   submitted = false;
 
@@ -48,23 +51,12 @@ export class CheckoutPrepareComponent {
           console.log("onSubmit - success", result);
           this.result = result;
           this.checkoutId = this.result.id;
-          this.canPay = true;
-          //now is the time to load external scripts
-          //let formURL = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId="+ this.checkoutId;
-          /*
-          require.ensure([], require => {
-            //load the form
-            //import formURL;
-            console.log("did load formURL");
-          });//*/
-          //import formURL;
-          //this._router.navigate(['/form', this.checkoutId]);
           this._router.navigate(['form', this.checkoutId]);
         },
         error => {
           console.log("onSubmit - error", this.error);
           this.error = error;
-          this.canPay = false;
+          this.submitted = false;
         }
       );
     //todo update localstorage with result and user with success
@@ -72,6 +64,8 @@ export class CheckoutPrepareComponent {
 
   //check if user has donated within the last hour
   canDonate(){
-    return !this._checkoutStore.didDontateWithinLastHour();
+    //this.lastDonation
+    let [ret, donation] = this._checkoutStore.didDontateWithinLastHour();
+    return !ret;
   }
 }

@@ -16,16 +16,10 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'raw'
-      },
-      /*{
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-      },*/
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
       }
+      //,{test: /\.scss$/, loaders: ["style", "css", "sass"]}
+      // sass-loader not scss-loader
+      ,{test: /\.scss$/,exclude: /node_modules/,loaders: ['raw-loader', 'sass-loader'] }
     ]
   },
 

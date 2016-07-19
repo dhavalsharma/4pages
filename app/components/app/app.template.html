@@ -1,5 +1,13 @@
 <router-outlet></router-outlet>
 
-<footer class="info">
-    <p>Written by <a href="https://github.com/dhavalsharma">{{ author }}</a></p>
-</footer>
+<div *ngIf = "error" class="alert alert-danger">
+  {{error}}
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container">
+    <footer class="info">
+        <p>Written by <a href="https://github.com/dhavalsharma">{{ author }}</a></p>
+    </footer>
+  </div>
+</nav>

@@ -1,8 +1,8 @@
 import {Inject} from '@angular/core';
 import {Http, Response, Headers, RequestOptions, Request, RequestMethod, URLSearchParams} from '@angular/http';
 // Add the RxJS Observable operators we need in this app.
-import '../rxjs-operators';
-//import {Observable} from 'rxjs/Rx';
+//import '../rxjs-operators';
+import {Observable} from 'rxjs/Rx';
 
 import { CheckoutModel } from '../models/checkout.model';
 

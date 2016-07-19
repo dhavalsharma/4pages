@@ -25,10 +25,10 @@ export class CheckoutStoreService {
       let diffTime = currTime - this.persistedDonation["when"];
       let oneHour = 60 * 60 * 1000;
       if( diffTime < oneHour){
-        return true;
+        return [true, persistedDonation];
       }
     }
-    return false;
+    return [false, persistedDonation];
   }
 
   get(){
