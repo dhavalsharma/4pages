@@ -17,13 +17,11 @@ export class CheckoutFormComponent implements OnInit, AfterViewInit{
     this._route = route;
   }
 
-  ngOnInit(){
-    console.log("ngOnInit");
-  }
   ngAfterViewInit(){
     console.log("ngAfterViewInit");
     this.loadScript();
   }
+  //dynamically load payon scripts with checkout id
   loadScript(){
     this.checkoutId = this._route.snapshot.params.checkoutId;
     console.log("loadScript", this.checkoutId);

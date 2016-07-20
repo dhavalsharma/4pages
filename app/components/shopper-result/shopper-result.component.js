@@ -42,7 +42,7 @@ export class ShopperResultComponent {
               //todo - compare the result with what is stored in localstorage and inform component
               this._checkoutStore.add(this.result);
               //should we navigate to root
-              this.router.navigate(['']);
+              this._router.navigate(['']);
             },
             error => {
               this.error = error;

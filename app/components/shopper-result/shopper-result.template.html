@@ -1,6 +1,14 @@
 
-<div>
+<div class="container">
 <p>
-  {{result}}
+  Checkouts result
+  {{result | json}}
   </p>
+
+  <div *ngIf = "error" class="alert alert-danger">
+    {{error}}
+  </div>
+  <div>
+    <a class="btn btn-primary" routerLink="/#">Home </a>
+  </div>
 </div>

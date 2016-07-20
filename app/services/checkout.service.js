@@ -61,20 +61,33 @@ export class CheckoutService {
   "id":"2377C7CAEF4B3716E61D2A85929CE4FD.sbg-vm-tx02"
   }
   */
+  //handle success for http calls
   extractData(res){
     console.log("extractData", res);
     let jsonResponse = res.json() || {};
     console.log("extractData jsonResponse", jsonResponse);
-    //update localStorage of the response jsonResponse["id"], jsonResponse["ndc"] jsonResponse["result"]["description"];
-    //Object.assign(this.checkoutModel, jsonResponse);
-
     //update client of the success/fail
     return jsonResponse;
   }
+
+  //handle failure for http calls
   handleError(error) {
     console.log('handleError', error);
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+
+    try{
+      //try to extract json
+      let jsonResponse = error.json() || {};
+      if( jsonResponse){
+        //append error
+        errMsg += "\n" + jsonResponse.result.description;
+      }
+    }
+    catch(e){
+      console.log("handleError e", e);
+    }
+
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }

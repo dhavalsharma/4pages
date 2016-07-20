@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
 
 //import {FORM_DIRECTIVES} from '@angular/common';
@@ -21,7 +21,7 @@ import customStyles from './checkout-prepare.scss';
   directives: [ROUTER_DIRECTIVES, ShopperResultComponent,
     CheckoutFormComponent]
 })
-export class CheckoutPrepareComponent {
+export class CheckoutPrepareComponent implements OnInit{
   constructor( checkout: CheckoutService, checkoutStore : CheckoutStoreService,
       route: ActivatedRoute, router: Router,
       @Inject('SHOPPER_RESULT_URL') shopperResultUrl) {
@@ -65,7 +65,13 @@ export class CheckoutPrepareComponent {
   //check if user has donated within the last hour
   canDonate(){
     //this.lastDonation
-    let [ret, donation] = this._checkoutStore.didDontateWithinLastHour();
-    return !ret;
+    //let [ret, donation] = this._checkoutStore.didDontateWithinLastHour();
+    return !this.canDonateNow;
+  }
+
+  ngOnInit(){
+    console.log("CheckoutPrepareComponent ngOnInit");
+    [this.canDonateNow, this.lastDonation] = this._checkoutStore.didDonateWithinLastHour();
+    console.log("canDonateNow", this.canDonateNow, "lastDonation", this.lastDonation);
   }
 }
