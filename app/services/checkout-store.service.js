@@ -9,7 +9,7 @@ export class CheckoutStoreService {
   }
   //make new donation
   add(donation){
-    let donation_save =
+    let donation_save = JSON.parse(donation);
     //add current timestamp
     donation_save["when"] = Date.now();
     console.log("donation_save", donation_save, "STORE_KEY", this.STORE_KEY);
