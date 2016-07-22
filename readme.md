@@ -1,3 +1,8 @@
+###
+Angular2 implementation of doing payment transactions using PAYON REST APIs.
+
+It is based on the following seed.
+
 # Angular 2 ESNext TodoMVC
 [![Dependency Status](https://david-dm.org/blacksonic/angular2-esnext-todomvc.svg)](https://david-dm.org/blacksonic/angular2-esnext-todomvc)
 [![devDependency Status](https://david-dm.org/blacksonic/angular2-esnext-todomvc/dev-status.svg)](https://david-dm.org/blacksonic/angular2-esnext-todomvc#info=devDependencies)
